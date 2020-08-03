@@ -3,6 +3,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import {FirebaseState} from './context/firebase/firebaseState';
+
 import {NewOrder} from './views/NewOrder';
 import {Menu} from './views/Menu';
 import {MealDetail} from './views/MealDetail';
@@ -15,60 +17,62 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#FFDA00',
-            },
-            headerBackTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}>
-          <Stack.Screen
-            name="NewOrder"
-            component={NewOrder}
-            options={{
-              title: 'Nueva Orden',
-            }}
-          />
-          <Stack.Screen
-            name="Menu"
-            component={Menu}
-            options={{
-              title: 'Nuestro Menú',
-            }}
-          />
-          <Stack.Screen
-            name="MealDetail"
-            component={MealDetail}
-            options={{
-              title: 'Detalle de Platillo',
-            }}
-          />
-          <Stack.Screen
-            name="MealForm"
-            component={MealForm}
-            options={{
-              title: 'Formulario de Platillo',
-            }}
-          />
-          <Stack.Screen
-            name="OrderSummary"
-            component={OrderSummary}
-            options={{
-              title: 'Resumen de Pedido',
-            }}
-          />
-          <Stack.Screen
-            name="OrderProgress"
-            component={OrderProgress}
-            options={{
-              title: 'Progreso de Pedido',
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FirebaseState>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#FFDA00',
+              },
+              headerBackTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}>
+            <Stack.Screen
+              name="NewOrder"
+              component={NewOrder}
+              options={{
+                title: 'Nueva Orden',
+              }}
+            />
+            <Stack.Screen
+              name="Menu"
+              component={Menu}
+              options={{
+                title: 'Nuestro Menú',
+              }}
+            />
+            <Stack.Screen
+              name="MealDetail"
+              component={MealDetail}
+              options={{
+                title: 'Detalle de Platillo',
+              }}
+            />
+            <Stack.Screen
+              name="MealForm"
+              component={MealForm}
+              options={{
+                title: 'Formulario de Platillo',
+              }}
+            />
+            <Stack.Screen
+              name="OrderSummary"
+              component={OrderSummary}
+              options={{
+                title: 'Resumen de Pedido',
+              }}
+            />
+            <Stack.Screen
+              name="OrderProgress"
+              component={OrderProgress}
+              options={{
+                title: 'Progreso de Pedido',
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FirebaseState>
     </>
   );
 };
