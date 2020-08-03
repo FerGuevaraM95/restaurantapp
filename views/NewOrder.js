@@ -1,8 +1,15 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Container, Button, Text} from 'native-base';
 
 export const NewOrder = () => {
   return (
-    <Text>NewOrder</Text>
+    <Container>
+      <View>
+        <Button rounded block>
+          <Text>Crear Nueva Order</Text>
+        </Button>
+      </View>
+    </Container>
   );
 };
