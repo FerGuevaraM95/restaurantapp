@@ -6,7 +6,7 @@ import {FirebaseContext} from './firebaseCotext';
 
 export const FirebaseState = (props) => {
 
-  console.log(firebase);
+  // console.log(firebase);
 
   // Initial State
   const initialState = {
