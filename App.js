@@ -29,6 +29,7 @@ const App = () => {
                 headerBackTitleStyle: {
                   fontWeight: 'bold',
                 },
+                headerTintColor: '#000',
               }}>
               <Stack.Screen
                 name="NewOrder"
