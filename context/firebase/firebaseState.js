@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react';
+import _ from 'lodash';
 
 import {firebase} from '../../firebase';
 import {FirebaseReducer} from './firebaseReducer';
@@ -23,12 +24,15 @@ export const FirebaseState = (props) => {
       .onSnapshot(handleSnapshot);
 
     function handleSnapshot(snapshot) {
-      const meals = snapshot.docs.map((doc) => {
+      let meals = snapshot.docs.map((doc) => {
         return {
           id: doc.id,
           ...doc.data(),
         };
       });
+
+      // Order by category with lodash
+      meals = _.sortBy(meals, 'category');
 
       dispatch({
         type: GET_PRODUCTS_SUCCESS,
