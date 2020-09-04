@@ -9,14 +9,22 @@ import {
   Text,
   Body,
 } from 'native-base';
+import {useNavigation} from '@react-navigation/native';
 
 import globalStyles from '../styles/global';
 import {FirebaseContext} from '../context/firebase/firebaseCotext';
+import {OrdersContext} from '../context/orders/ordersContext';
 import {StyleSheet} from 'react-native';
 
 export const Menu = () => {
   // Firebase context
   const {menu, getProducts} = useContext(FirebaseContext);
+
+  // Orders context
+  const {selectedMeal} = useContext(OrdersContext);
+
+  // Hook for redirect
+  const navigation = useNavigation();
 
   useEffect(() => {
     getProducts();
@@ -51,7 +59,12 @@ export const Menu = () => {
             return (
               <Fragment key={id}>
                 {showHeading(category, i)}
-                <ListItem>
+                <ListItem
+                  onPress={() => {
+                    const {existence, ...meal2} = meal;
+                    selectedMeal(meal2);
+                    navigation.navigate('MealDetail');
+                  }}>
                   <Thumbnail large square source={{uri: image}} />
                   <Body>
                     <Text>{name}</Text>
