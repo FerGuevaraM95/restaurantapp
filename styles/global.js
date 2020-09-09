@@ -16,6 +16,22 @@ const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000',
   },
+  title: {
+    textAlign: 'center',
+    marginTop: 40,
+    marginBottom: 20,
+    fontSize: 30,
+  },
+  image: {
+    height: 300,
+    width: '100%',
+  },
+  quantity: {
+    marginVertical: 20,
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
 });
 
 export default globalStyles;
