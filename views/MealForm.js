@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {
   Container,
@@ -17,6 +17,22 @@ import {OrdersContext} from '../context/orders/ordersContext';
 import globalStyles from '../styles/global';
 
 export const MealForm = () => {
+  const [quantity, setQuantity] = useState(1);
+
+  const calculateQuantity = (quantity) => {};
+
+  const incrementOne = () => {
+    const newQuantity = parseInt(quantity) + 1;
+    setQuantity(newQuantity);
+  };
+
+  const decrementOne = () => {
+    if (quantity > 1) {
+      const newQuantity = parseInt(quantity) - 1;
+      setQuantity(newQuantity);
+    }
+  };
+
   return (
     <Container>
       <Content>
@@ -24,15 +40,28 @@ export const MealForm = () => {
           <Text style={globalStyles.title}>Cantidad</Text>
           <Grid>
             <Col>
-              <Button props dark style={{height: 80, justifyContent: 'center'}}>
+              <Button
+                props
+                dark
+                style={{height: 80, justifyContent: 'center'}}
+                onPress={() => decrementOne()}>
                 <Icon style={{fontSize: 40}} name="remove" />
               </Button>
             </Col>
             <Col>
-              <Input style={{textAlign: 'center', fontSize: 20}} value="1"/>
+              <Input
+                style={{textAlign: 'center', fontSize: 20}}
+                keyboardType="numeric"
+                value={quantity.toString()}
+                onChangeText={(quantity) => setQuantity(quantity)}
+              />
             </Col>
             <Col>
-              <Button props dark style={{height: 80, justifyContent: 'center'}}>
+              <Button
+                props
+                dark
+                style={{height: 80, justifyContent: 'center'}}
+                onPress={() => incrementOne()}>
                 <Icon style={{fontSize: 40}} name="add" />
               </Button>
             </Col>
