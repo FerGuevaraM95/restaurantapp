@@ -23,8 +23,11 @@ export const MealForm = () => {
   const [total, setTotal] = useState(0);
 
   // context
-  const {meal} = useContext(OrdersContext);
+  const {meal, saveOrder} = useContext(OrdersContext);
   const {price} = meal;
+
+  // redirect
+  const navigation = useNavigation();
 
   useEffect(() => {
     calculateTotal();
@@ -57,6 +60,13 @@ export const MealForm = () => {
           text: 'Confirmar',
           onPress: () => {
             // store order to main order
+            const order = {
+              ...meal,
+              quantity,
+              total,
+            };
+            saveOrder(order);
+            navigation.navigate('OrderSummary');
           },
         },
         {

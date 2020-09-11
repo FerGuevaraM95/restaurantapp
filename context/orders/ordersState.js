@@ -2,7 +2,7 @@ import React, {useReducer} from 'react';
 
 import {OrdersContext} from './ordersContext';
 import {OrdersReducer} from './ordersReducer';
-import {SELECTED_PRODUCT} from '../../types';
+import {SELECTED_PRODUCT, CONFIRM_ORDER_MEAL} from '../../types';
 
 export const OrdersState = (props) => {
   // Initial State
@@ -22,9 +22,17 @@ export const OrdersState = (props) => {
     });
   };
 
+  // Save order
+  const saveOrder = (order) => {
+    dispatch({
+      type: CONFIRM_ORDER_MEAL,
+      payload: order,
+    });
+  };
+
   return (
     <OrdersContext.Provider
-      value={{order: state.order, meal: state.meal, selectedMeal}}>
+      value={{order: state.order, meal: state.meal, selectedMeal, saveOrder}}>
       {props.children}
     </OrdersContext.Provider>
   );
