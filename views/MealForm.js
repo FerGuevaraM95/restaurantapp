@@ -55,7 +55,7 @@ export const MealForm = () => {
               <Button
                 props
                 dark
-                style={{height: 80, justifyContent: 'center'}}
+                style={{height: 80, width: '100%', justifyContent: 'center'}}
                 onPress={() => decrementOne()}>
                 <Icon style={{fontSize: 40}} name="remove" />
               </Button>
@@ -72,7 +72,7 @@ export const MealForm = () => {
               <Button
                 props
                 dark
-                style={{height: 80, justifyContent: 'center'}}
+                style={{height: 80, width: '100%', justifyContent: 'center'}}
                 onPress={() => incrementOne()}>
                 <Icon style={{fontSize: 40}} name="add" />
               </Button>
