@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {
   Container,
@@ -18,8 +18,20 @@ import globalStyles from '../styles/global';
 
 export const MealForm = () => {
   const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(0);
 
-  const calculateQuantity = (quantity) => {};
+  // context
+  const {meal} = useContext(OrdersContext);
+  const {price} = meal;
+
+  useEffect(() => {
+    calculateTotal();
+  }, [quantity]);
+
+  const calculateTotal = () => {
+    const totalPay = price * quantity;
+    setTotal(totalPay);
+  };
 
   const incrementOne = () => {
     const newQuantity = parseInt(quantity) + 1;
@@ -66,6 +78,7 @@ export const MealForm = () => {
               </Button>
             </Col>
           </Grid>
+          <Text style={globalStyles.quantity}>Total: ${total}</Text>
         </Form>
       </Content>
     </Container>
