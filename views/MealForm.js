@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {Alert} from 'react-native';
 import {
   Container,
   Content,
@@ -10,6 +10,8 @@ import {
   Col,
   Button,
   Text,
+  Footer,
+  FooterTab,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 
@@ -43,6 +45,26 @@ export const MealForm = () => {
       const newQuantity = parseInt(quantity) - 1;
       setQuantity(newQuantity);
     }
+  };
+
+  // confirm order
+  const confirmOrder = () => {
+    Alert.alert(
+      '¿Deseas confirmar tu pedido?',
+      'Un pedido confirmado ya no se podrá modificar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            // store order to main order
+          },
+        },
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+      ],
+    );
   };
 
   return (
@@ -81,6 +103,13 @@ export const MealForm = () => {
           <Text style={globalStyles.quantity}>Total: ${total}</Text>
         </Form>
       </Content>
+      <Footer>
+        <FooterTab>
+          <Button style={globalStyles.button} onPress={() => confirmOrder()}>
+            <Text style={globalStyles.buttonText}>Agregar al pedido</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
     </Container>
   );
 };
