@@ -20,17 +20,28 @@ import {OrdersContext} from '../context/orders/ordersContext';
 import globalStyles from '../styles/global';
 
 export const OrderSummary = () => {
-  const {order} = useContext(OrdersContext);
-  console.log(order);
+  const {order, total, showSummary} = useContext(OrdersContext);
+
+  useEffect(() => {
+    calculateTotal();
+  }, [total]);
+
+  calculateTotal = () => {
+    let newTotal = 0;
+    newTotal = order.reduce((newTotal, article) => newTotal + article.total, 0);
+
+    showSummary(newTotal);
+  };
+
   return (
     <Container style={globalStyles.container}>
       <Content style={globalStyles.content}>
         <H1 style={globalStyles.title}>Resumen Pedido</H1>
 
-        {order.map((meal) => {
+        {order.map((meal, i) => {
           const {quantity, name, image, id, price} = meal;
           return (
-            <List key={id}>
+            <List key={id + i}>
               <ListItem thumbnail>
                 <Left>
                   <Thumbnail large square source={{uri: image}} />
@@ -45,7 +56,7 @@ export const OrderSummary = () => {
           );
         })}
 
-        <Text style={globalStyles.quantity}>Total a pagar: $ </Text>
+        <Text style={globalStyles.quantity}>Total a pagar: ${total}</Text>
       </Content>
     </Container>
   );
