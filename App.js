@@ -13,6 +13,8 @@ import {MealForm} from './views/MealForm';
 import {OrderSummary} from './views/OrderSummary';
 import {OrderProgress} from './views/OrderProgress';
 
+import {ResumeButton} from './components/ui/ResumeButton';
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -43,6 +45,7 @@ const App = () => {
                 component={Menu}
                 options={{
                   title: 'Nuestro Menú',
+                  headerRight: (props) => <ResumeButton />,
                 }}
               />
               <Stack.Screen

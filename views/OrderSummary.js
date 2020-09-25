@@ -22,6 +22,8 @@ import globalStyles from '../styles/global';
 export const OrderSummary = () => {
   const {order, total, showSummary} = useContext(OrdersContext);
 
+  const navigation = useNavigation();
+
   useEffect(() => {
     calculateTotal();
   }, [total]);
@@ -57,7 +59,27 @@ export const OrderSummary = () => {
         })}
 
         <Text style={globalStyles.quantity}>Total a pagar: ${total}</Text>
+
+        <Button
+          onPress={() => navigation.navigate('Menu')}
+          style={{marginTop: 30}}
+          full
+          dark>
+          <Text style={[globalStyles.buttonText, {color: '#FFFFFF'}]}>
+            Seguir pidiendo
+          </Text>
+        </Button>
       </Content>
+      <Footer>
+        <FooterTab>
+          <Button
+            onPress={() => navigation.navigate('OrderProgress')}
+            style={[globalStyles.button, {marginTop: 30}]}
+            full>
+            <Text style={globalStyles.buttonText}>Ordenar Pedido</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
     </Container>
   );
 };
