@@ -20,13 +20,13 @@ import {OrdersContext} from '../context/orders/ordersContext';
 import globalStyles from '../styles/global';
 
 export const OrderSummary = () => {
-  const {order, total, showSummary} = useContext(OrdersContext);
+  const {order, total, showSummary, deleteProduct} = useContext(OrdersContext);
 
   const navigation = useNavigation();
 
   useEffect(() => {
     calculateTotal();
-  }, [total]);
+  }, [order]);
 
   const calculateTotal = () => {
     let newTotal = 0;
@@ -53,6 +53,27 @@ export const OrderSummary = () => {
     );
   };
 
+  // Confirm delete order
+  const confirmDelete = (id) => {
+    Alert.alert(
+      '¿Deseas eliminar este articulo?',
+      'Una vez eliminado no se puede recuperar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            // Delete from state
+            deleteProduct(id);
+          },
+        },
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+      ],
+    );
+  };
+
   return (
     <Container style={globalStyles.container}>
       <Content style={globalStyles.content}>
@@ -70,6 +91,16 @@ export const OrderSummary = () => {
                   <Text>{name}</Text>
                   <Text>Cantidad: {quantity}</Text>
                   <Text>Precio: ${price}</Text>
+
+                  <Button
+                    onPress={() => confirmDelete(id)}
+                    full
+                    danger
+                    style={{marginTop: 20}}>
+                    <Text style={[globalStyles.buttonText, {color: '#FFFFFF'}]}>
+                      Eliminar
+                    </Text>
+                  </Button>
                 </Body>
               </ListItem>
             </List>

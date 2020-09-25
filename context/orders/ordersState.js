@@ -2,7 +2,12 @@ import React, {useReducer} from 'react';
 
 import {OrdersContext} from './ordersContext';
 import {OrdersReducer} from './ordersReducer';
-import {SELECTED_PRODUCT, CONFIRM_ORDER_MEAL, SHOW_SUMMARY} from '../../types';
+import {
+  SELECTED_PRODUCT,
+  CONFIRM_ORDER_MEAL,
+  SHOW_SUMMARY,
+  DELETE_PRODUCT,
+} from '../../types';
 
 export const OrdersState = (props) => {
   // Initial State
@@ -39,6 +44,14 @@ export const OrdersState = (props) => {
     });
   };
 
+  // Delete article
+  const deleteProduct = (id) => {
+    dispatch({
+      type: DELETE_PRODUCT,
+      payload: id,
+    });
+  };
+
   return (
     <OrdersContext.Provider
       value={{
@@ -48,6 +61,7 @@ export const OrdersState = (props) => {
         selectedMeal,
         saveOrder,
         showSummary,
+        deleteProduct,
       }}>
       {props.children}
     </OrdersContext.Provider>
