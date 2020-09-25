@@ -28,11 +28,29 @@ export const OrderSummary = () => {
     calculateTotal();
   }, [total]);
 
-  calculateTotal = () => {
+  const calculateTotal = () => {
     let newTotal = 0;
     newTotal = order.reduce((newTotal, article) => newTotal + article.total, 0);
 
     showSummary(newTotal);
+  };
+
+  // Redirect to progress order
+  const progressOrder = () => {
+    Alert.alert(
+      'Revisa tu pedido',
+      'Una vez que realizas tu pedido no podras cambiarlo',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => navigation.navigate('OrderProgress'),
+        },
+        {
+          text: 'Revisar',
+          style: 'cancel',
+        },
+      ],
+    );
   };
 
   return (
@@ -73,7 +91,7 @@ export const OrderSummary = () => {
       <Footer>
         <FooterTab>
           <Button
-            onPress={() => navigation.navigate('OrderProgress')}
+            onPress={() => progressOrder()}
             style={[globalStyles.button, {marginTop: 30}]}
             full>
             <Text style={globalStyles.buttonText}>Ordenar Pedido</Text>
