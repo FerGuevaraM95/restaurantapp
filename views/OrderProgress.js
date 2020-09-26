@@ -7,11 +7,10 @@ import {OrdersContext} from '../context/orders/ordersContext';
 import globalStyles from '../styles/global';
 
 export const OrderProgress = () => {
-
-  const {order} = useContext(OrdersContext);
+  const {orderId} = useContext(OrdersContext);
   return (
     <Container>
-      <Text>progress</Text>
+      <Text>{orderId}</Text>
     </Container>
   );
 };

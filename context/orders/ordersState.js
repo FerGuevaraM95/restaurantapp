@@ -7,6 +7,7 @@ import {
   CONFIRM_ORDER_MEAL,
   SHOW_SUMMARY,
   DELETE_PRODUCT,
+  ORDERED_ORDER,
 } from '../../types';
 
 export const OrdersState = (props) => {
@@ -15,6 +16,7 @@ export const OrdersState = (props) => {
     order: [],
     meal: null,
     total: 0,
+    orderId: '',
   };
 
   // Usereducer with dispach for run functions
@@ -52,16 +54,25 @@ export const OrdersState = (props) => {
     });
   };
 
+  const orderPlaced = (id) => {
+    dispatch({
+      type: ORDERED_ORDER,
+      payload: id,
+    });
+  };
+
   return (
     <OrdersContext.Provider
       value={{
         order: state.order,
         meal: state.meal,
         total: state.total,
+        orderId: state.orderId,
         selectedMeal,
         saveOrder,
         showSummary,
         deleteProduct,
+        orderPlaced,
       }}>
       {props.children}
     </OrdersContext.Provider>

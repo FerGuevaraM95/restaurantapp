@@ -3,6 +3,7 @@ import {
   CONFIRM_ORDER_MEAL,
   SHOW_SUMMARY,
   DELETE_PRODUCT,
+  ORDERED_ORDER,
 } from '../../types';
 
 export const OrdersReducer = (state, action) => {
@@ -26,6 +27,11 @@ export const OrdersReducer = (state, action) => {
       return {
         ...state,
         order: state.order.filter((article) => article.id !== action.payload),
+      };
+    case ORDERED_ORDER:
+      return {
+        ...state,
+        orderId: action.payload,
       };
     default:
       return state;

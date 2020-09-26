@@ -21,7 +21,9 @@ import {firebase} from '../firebase';
 import globalStyles from '../styles/global';
 
 export const OrderSummary = () => {
-  const {order, total, showSummary, deleteProduct} = useContext(OrdersContext);
+  const {order, total, showSummary, deleteProduct, orderPlaced} = useContext(
+    OrdersContext,
+  );
 
   const navigation = useNavigation();
 
@@ -59,12 +61,12 @@ export const OrderSummary = () => {
               const order = await firebase.db
                 .collection('orders')
                 .add(orderObj);
-              console.log('ORDER:', order.id);
+              orderPlaced(order.id);
+              // Redirect to progress
+              navigation.navigate('OrderProgress');
             } catch (error) {
               console.log('ERROR:', error);
             }
-
-            navigation.navigate('OrderProgress');
           },
         },
         {
