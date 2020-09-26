@@ -17,6 +17,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 import {OrdersContext} from '../context/orders/ordersContext';
+import {firebase} from '../firebase';
 import globalStyles from '../styles/global';
 
 export const OrderSummary = () => {
@@ -43,7 +44,28 @@ export const OrderSummary = () => {
       [
         {
           text: 'Confirmar',
-          onPress: () => navigation.navigate('OrderProgress'),
+          onPress: async () => {
+            const orderObj = {
+              deliveryTime: 0,
+              completed: false,
+              total: Number(total),
+              order: order,
+              create: Date.now(),
+            };
+
+            console.log(orderObj);
+
+            try {
+              const order = await firebase.db
+                .collection('orders')
+                .add(orderObj);
+              console.log('ORDER:', order.id);
+            } catch (error) {
+              console.log('ERROR:', error);
+            }
+
+            navigation.navigate('OrderProgress');
+          },
         },
         {
           text: 'Revisar',

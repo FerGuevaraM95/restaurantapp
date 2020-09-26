@@ -1,8 +1,17 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {Container, Text, H1, H3, Button} from 'native-base';
+import {useNavigation} from '@react-navigation/native';
+
+import {OrdersContext} from '../context/orders/ordersContext';
+import globalStyles from '../styles/global';
 
 export const OrderProgress = () => {
+
+  const {order} = useContext(OrdersContext);
   return (
-    <Text>OrderProgress</Text>
+    <Container>
+      <Text>progress</Text>
+    </Container>
   );
 };
