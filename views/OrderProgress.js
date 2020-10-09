@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Container, Text, H1, H3, Button} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
+import Countdown from 'react-countdown';
 
 import {firebase} from '../firebase';
 import {OrdersContext} from '../context/orders/ordersContext';
@@ -24,9 +25,49 @@ export const OrderProgress = () => {
     getProduct();
   }, []);
 
+  // show Countdown
+  const renderer = ({minutes, seconds}) => {
+    return (
+      <Text style={styles.time}>
+        {minutes}:{seconds}
+      </Text>
+    );
+  };
+
   return (
-    <Container>
-      <Text>{time}</Text>
+    <Container style={globalStyles.container}>
+      <View style={[globalStyles.content, {marginTop: 50}]}>
+        {!time ? (
+          <>
+            <Text style={{textAlign: 'center'}}>
+              Hemos recibido tu orden...
+            </Text>
+            <Text style={{textAlign: 'center'}}>
+              Calculando el tiempo de entrega
+            </Text>
+          </>
+        ) : null}
+
+        {time ? (
+          <>
+            <Text style={{textAlign: 'center'}}>
+              Su orden estará lista en:{' '}
+            </Text>
+            <Text>
+              <Countdown date={Date.now() + time * 60000} renderer={renderer} />
+            </Text>
+          </>
+        ) : null}
+      </View>
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  time: {
+    marginBottom: 20,
+    fontSize: 60,
+    textAlign: 'center',
+    margin: 30,
+  },
+});
