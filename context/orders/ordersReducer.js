@@ -31,6 +31,8 @@ export const OrdersReducer = (state, action) => {
     case ORDERED_ORDER:
       return {
         ...state,
+        order: [],
+        total: 0,
         orderId: action.payload,
       };
     default:

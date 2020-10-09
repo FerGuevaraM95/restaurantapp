@@ -11,6 +11,8 @@ import globalStyles from '../styles/global';
 export const OrderProgress = () => {
   const {orderId} = useContext(OrdersContext);
 
+  const navigation = useNavigation();
+
   const [time, setTime] = useState(0);
   const [completed, setCompleted] = useState(false);
 
@@ -67,6 +69,16 @@ export const OrderProgress = () => {
             <H3 style={styles.completedText}>
               Por favor, pase a recoger su pedido
             </H3>
+
+            <Button
+              style={[globalStyles.button, {marginTop: 100}]}
+              rounded
+              block
+              onPress={() => navigation.navigate('NewOrder')}>
+              <Text style={globalStyles.buttonText}>
+                Comenr una nueva orden
+              </Text>
+            </Button>
           </>
         )}
       </View>
