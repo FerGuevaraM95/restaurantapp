@@ -12,6 +12,7 @@ export const OrderProgress = () => {
   const {orderId} = useContext(OrdersContext);
 
   const [time, setTime] = useState(0);
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     const getProduct = () => {
@@ -20,6 +21,7 @@ export const OrderProgress = () => {
         .doc(orderId)
         .onSnapshot(function (doc) {
           setTime(doc.data().deliveryTime);
+          setCompleted(doc.data().completed);
         });
     };
     getProduct();
@@ -48,7 +50,7 @@ export const OrderProgress = () => {
           </>
         ) : null}
 
-        {time ? (
+        {!completed && time ? (
           <>
             <Text style={{textAlign: 'center'}}>
               Su orden estará lista en:{' '}
@@ -58,6 +60,15 @@ export const OrderProgress = () => {
             </Text>
           </>
         ) : null}
+
+        {completed && (
+          <>
+            <H1 style={styles.completedText}>Orden Lista</H1>
+            <H3 style={styles.completedText}>
+              Por favor, pase a recoger su pedido
+            </H3>
+          </>
+        )}
       </View>
     </Container>
   );
@@ -69,5 +80,10 @@ const styles = StyleSheet.create({
     fontSize: 60,
     textAlign: 'center',
     margin: 30,
+  },
+  completedText: {
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    marginBottom: 20,
   },
 });
